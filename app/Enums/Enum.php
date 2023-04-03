@@ -2,8 +2,6 @@
 
 namespace App\Enums;
 
-use App\Contracts\IEnum;
-
 Abstract class Enum implements IEnum
 {
     public static function toArray()
