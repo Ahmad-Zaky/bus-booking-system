@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\Admin;
+use App\Models\User;
+use Illuminate\Support\Facades\Artisan;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -14,7 +18,7 @@
 uses(
     Tests\TestCase::class,
     // Illuminate\Foundation\Testing\RefreshDatabase::class,
-)->in('Feature');
+);
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +46,62 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+
+$globals = [];
+
+$refreshDBRunOnce = false;
+function refreshDB()
 {
-    // ..
+    global $refreshDBRunOnce;
+
+    if (! $refreshDBRunOnce) {
+        $refreshDBRunOnce = true;
+
+        Artisan::call('migrate:fresh');
+    }
+}
+
+function bootstrapApp()
+{
+    (new class {
+        use \Tests\CreatesApplication;
+    })->createApplication();
+}
+
+function prepare(&$testObj, $test)
+{
+    global $globals;
+
+    switch ($test) {
+        // Admin
+        case "admin.auth":
+            $testObj->admin = $globals["admin.auth.admin"] ?? NULL;
+            $testObj->superAdmin = $globals["admin.auth.superAdmin"] ?? NULL;
+            
+            break;
+
+        // User
+        case "auth":
+            $testObj->user = $globals["auth.user"] ?? NULL;
+
+            break;
+    }
+}
+
+
+function newUser($params = [], $count = NULL)
+{
+    return User::factory($count)->create($params);
+}
+
+function newAdmin($params = [], $count = NULL)
+{
+    return Admin::factory($count)->create($params);
+}
+
+function newSuperAdmin($params = [], $count = NULL)
+{
+    return Admin::factory($count)->create(array_merge($params ?? [], [
+        "is_super" => true
+    ]));
 }
