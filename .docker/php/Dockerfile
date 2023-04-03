@@ -32,6 +32,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 # Small hack for me to simplify chmod command needed on adding new files from within the container
 # to prevent Permission Denied Issues
 RUN echo "alias chp='chmod -R 0777 app/ database/ storage/ config/ resources/'" >> ~/.bashrc
+RUN echo "alias autoload='composer dumpautoload'" >> ~/.bashrc
+RUN echo "alias art='php artisan'" >> ~/.bashrc
 RUN echo "alias optimize='php artisan optimize'" >> ~/.bashrc
 RUN echo "alias migrate='php artisan migrate'" >> ~/.bashrc
 RUN echo "alias smigrate='php artisan migrate --seed'" >> ~/.bashrc
