@@ -17,7 +17,9 @@ class BusFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "number" => $this->faker->unique()->randomNumber(7, true),
+            "plate_number" => $this->faker->unique()->bothify('#### ???'),
+            "capacity" => 12,
         ];
     }
 }

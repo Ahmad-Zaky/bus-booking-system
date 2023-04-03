@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Bus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class SeatFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "number" =>  $this->faker->randomElement(['a', 'b']) . rand(1, 6),
+            "order" => rand(1, 12),
+            "bus_id" => Bus::factory(),
         ];
     }
 }
