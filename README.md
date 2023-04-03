@@ -1,2 +1,2 @@
-# bus-booking-system
+# Bus booking system
 Bus booking system
