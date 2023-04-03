@@ -15,9 +15,13 @@ return new class extends Migration
             $table->id();
 
             $table->integer("estimated_time");
-            $table->boolean("is_start");
-            $table->boolean("is_destination");
-            $table->tinyInteger("order");
+
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreign('parent_id')
+                ->references('id')
+                ->on('stations')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
 
             $table->foreignId('governrate_id')
                 ->constrained()
