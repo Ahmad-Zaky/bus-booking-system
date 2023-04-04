@@ -12,6 +12,7 @@ class Trip extends Model
     protected $fillable = [
         "title",
         "number",
+        "status",
         "departure_at",
         "estimated_arrival_at",
         "bus_id",
@@ -23,8 +24,9 @@ class Trip extends Model
      * @var array
      */
     protected $casts = [
-        'departure_at' => 'datetime:Y-m-d H:i:s',
-        'estimated_arrival_at' => 'datetime:Y-m-d H:i:s',
+        'status' => 'integer',
+        'departure_at' => 'datetime',
+        'estimated_arrival_at' => 'datetime',
     ];
 
     public function bus() {
@@ -37,5 +39,45 @@ class Trip extends Model
 
     public function reservations() {
         return $this->hasMany(Reservation::class);
+    }
+
+    public function scopeFilter($q, $request) 
+    {
+        $q
+            ->when($request->search, function ($q, $search) {
+                $q->where(fn($q) => 
+                    $q
+                        ->where("title", "like", "%{$search}%" )
+                        ->orWhere("number", "like", "%{$search}%" )
+                );
+            })
+            ->when($request->from && $request->to, function ($q) use ($request) {
+                return compareFromAndTo($q, "created_at", $request->from, $request->to);
+            })
+            ->when($request->from && ! $request->to, function ($q) use ($request) {
+                return compareFrom($q, "created_at", $request->from);
+            })
+            ->when(! $request->from && $request->to, function ($q) use ($request) {
+                return compareTo($q, "created_at", $request->to);
+            });  
+    }
+
+    public static function _create($data)
+    {
+        return self::create($data);
+    }
+
+    public function _update($data)
+    {
+        $this->update($data);
+
+        return $this;
+    }
+
+    public function _destroy()
+    {
+        $this->delete();
+
+        return $this;
     }
 }
