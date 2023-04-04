@@ -8,13 +8,14 @@ use App\Http\Requests\TripUpdateRequest;
 use App\Http\Resources\Trip\{TripCollection, TripResource};
 use App\Models\Trip;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Throwable;
 
 class TripController extends Controller
 {
-    public function index(): TripCollection
+    public function index(Request $request): TripCollection
     {
-        try { return new TripCollection(Trip::paginate()); }
+        try { return new TripCollection(Trip::query()->filter($request)->paginate()); }
         
         catch (Throwable $th) {
             return $this->handleInternalErrorResponse($th);

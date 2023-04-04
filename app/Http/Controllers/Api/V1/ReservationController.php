@@ -8,13 +8,14 @@ use App\Http\Requests\ReservationUpdateRequest;
 use App\Http\Resources\Reservation\{ReservationCollection, ReservationResource};
 use App\Models\Reservation;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Throwable;
 
 class ReservationController extends Controller
 {
-    public function index(): ReservationCollection|JsonResponse
+    public function index(Request $request): ReservationCollection|JsonResponse
     {
-        try { return new ReservationCollection(Reservation::paginate()); }
+        try { return new ReservationCollection(Reservation::query()->filter($request)->paginate()); }
         
         catch (Throwable $th) {
             return $this->handleInternalErrorResponse($th);
