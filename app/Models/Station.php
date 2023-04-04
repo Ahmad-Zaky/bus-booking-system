@@ -16,6 +16,8 @@ class Station extends Model
         "trip_id",
     ];
 
+    protected $appends = ["estimated_arrival_at"];
+
     /**
      * The attributes that should be cast.
      *
@@ -57,5 +59,32 @@ class Station extends Model
 
     public function getFirstStationAttribute() {
         return $this->prevStations->last();
+    }
+
+    public function getEstimatedArrivalAtAttribute()
+    {
+        $totalEstimatedTime = $this->prevStations->sum("estimated_time");
+
+        if ($departureAt = $this->trip->departure_at) {
+            return addMinutes($departureAt, $totalEstimatedTime);
+        }
+
+        return collect(flatPrevStations($this));
+    }
+
+    public static function _attach(Trip $trip, array $stations) 
+    {
+        $trip->stations()->delete();
+
+        $parent = NULL;
+        foreach (
+            collect($stations)->sortBy("order")->toArray() as $station
+        ) {
+            $station["parent_id"] = $parent;
+            $newStation = $trip->stations()->create($station);
+            $parent = $newStation->id;
+        }
+
+        return true;
     }
 }

@@ -64,12 +64,22 @@ class Trip extends Model
 
     public static function _create($data)
     {
-        return self::create($data);
+        $data["estimated_arrival_at"] = (new self)->calcEstimatedArrivalAt($data["departure_at"], $data["stations"]);
+
+        $trip = self::create($data);
+
+        Station::_attach($trip, $data["stations"]);
+
+        return $trip;
     }
 
     public function _update($data)
     {
+        $data["estimated_arrival_at"] = (new self)->calcEstimatedArrivalAt($data["departure_at"], $data["stations"]);
+
         $this->update($data);
+
+        Station::_attach($this, $data["stations"]);
 
         return $this;
     }
@@ -79,5 +89,13 @@ class Trip extends Model
         $this->delete();
 
         return $this;
+    }
+
+    protected function calcEstimatedArrivalAt($departureAt, $stations)
+    {
+        $totalEstimatedTime = collect($stations)->sum("estimated_time");
+
+        return addMinutes($departureAt, $totalEstimatedTime);
+
     }
 }

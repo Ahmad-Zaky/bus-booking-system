@@ -20,7 +20,7 @@ class TripFactory extends Factory
     {
         $departure_at = $this->faker->dateTime()->format("Y-m-d H:i:s");
         
-        $estimatedArrivalAt = $this->addHours($departure_at, rand(1, 9));
+        $estimatedArrivalAt = addHours($departure_at, rand(1, 9));
 
         return [
             "title" => $this->faker->sentence(),
@@ -30,10 +30,5 @@ class TripFactory extends Factory
             "estimated_arrival_at" => $estimatedArrivalAt,
             "bus_id" => Bus::factory(),
         ];
-    }
-
-    protected function addHours($dateTime, $hours) 
-    {
-        return date('Y-m-d H:i:s', strtotime("+{$hours} hour",strtotime($dateTime)));
     }
 }
