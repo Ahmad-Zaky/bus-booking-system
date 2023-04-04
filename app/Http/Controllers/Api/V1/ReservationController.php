@@ -13,24 +13,6 @@ use Throwable;
 
 class ReservationController extends Controller
 {
-    public function index(Request $request): ReservationCollection|JsonResponse
-    {
-        try { return new ReservationCollection(Reservation::_paginate($request)); }
-        
-        catch (Throwable $th) {
-            return $this->handleInternalErrorResponse($th);
-        }
-    }
-
-    public function show(Reservation $reservation): ReservationResource|JsonResponse
-    {
-        try { return new ReservationResource($reservation); }
-        
-        catch (Throwable $th) {
-            return $this->handleInternalErrorResponse($th);
-        }
-    }
-
     public function store(ReservationStoreRequest $request): ReservationResource|JsonResponse
     {
         try { return new ReservationResource(Reservation::_create($request->validated())); }
