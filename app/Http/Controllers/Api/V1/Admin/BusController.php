@@ -14,7 +14,7 @@ class BusController extends Controller
 {
     public function index(): BusCollection|JsonResponse
     {
-        try { return new BusCollection(Bus::paginate()); }
+        try { return new BusCollection(Bus::_paginate()); }
         
         catch (Throwable $th) {
             return $this->handleInternalErrorResponse($th);

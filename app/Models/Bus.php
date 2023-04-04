@@ -31,6 +31,11 @@ class Bus extends Model
     public function trips() {
         return $this->hasMany(Trip::class);
     }
+    
+    public static function _paginate() 
+    {
+        return self::with(["trips.stations", "seats"])->paginate();
+    }
 
     public static function _create($data)
     {
