@@ -4,18 +4,29 @@ namespace App\Http\Controllers\Api\V1;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\User\UserResource;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules;
-
+use Throwable;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function profile(): UserResource|JsonResponse
+    {
+        try { return new UserResource(auth()->user()); }
+
+        catch (Throwable $th) {
+            return $this->handleInternalErrorResponse($th);
+        }
+    }
+
+    public function register(Request $request): JsonResponse
     {
         try {
             $validateUser = Validator::make($request->all(), [
@@ -52,7 +63,7 @@ class AuthController extends Controller
         }
     }
 
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         try {
             $validateUser = Validator::make($request->all(), 
@@ -91,7 +102,7 @@ class AuthController extends Controller
 
     }
 
-    public function logout()
+    public function logout(): JsonResponse
     {
         auth()->user()->tokens()->delete();
 

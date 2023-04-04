@@ -3,18 +3,28 @@
 namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Admin\AdminResource;
 use App\Models\Admin;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules;
-
+use Throwable;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function profile(): AdminResource|JsonResponse
+    {
+        try { return new AdminResource(auth("admin")->user()); }
+        
+        catch (Throwable $th) {
+            return $this->handleInternalErrorResponse($th);
+        }
+    }
+
+    public function register(Request $request): JsonResponse
     {
         try {
             $validateAdmin = Validator::make($request->all(), [
@@ -51,7 +61,7 @@ class AuthController extends Controller
         }
     }
 
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         try {
             $validateUser = Validator::make($request->all(), 
@@ -92,7 +102,7 @@ class AuthController extends Controller
 
     }
 
-    public function logout()
+    public function logout(): JsonResponse
     {
         auth("admin")->user()->tokens()->delete();
 
