@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\Admin\AuthController;
+use App\Http\Controllers\Api\V1\Admin\BusController;
 
 Route::post('login', [AuthController::class, 'login'])->name("admin.login");
 
@@ -14,4 +15,6 @@ Route::middleware('auth:admin')->group(function () {
     })->name("admin.profile");
     
     Route::post('logout', [AuthController::class, 'logout'])->name("admin.logout");
+
+    Route::apiResource("buses", BusController::class);
 });

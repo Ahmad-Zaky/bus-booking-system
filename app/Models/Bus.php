@@ -14,7 +14,7 @@ class Bus extends Model
         "plate_number",
         "capacity",
     ];
-            
+
     /**
      * The attributes that should be cast.
      *
@@ -30,5 +30,24 @@ class Bus extends Model
 
     public function trips() {
         return $this->hasMany(Trip::class);
+    }
+
+    public static function _create($data)
+    {
+        return self::create($data);
+    }
+
+    public function _update($data)
+    {
+        $this->update($data);
+
+        return $this;
+    }
+
+    public function _destroy()
+    {
+        $this->delete();
+
+        return $this;
     }
 }
