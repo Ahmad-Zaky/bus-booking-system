@@ -11,8 +11,6 @@ class Station extends Model
 
     protected $fillable = [
         "estimated_time",
-        "is_start",
-        "is_destination",
         "parent_id",
         "governrate_id",
         "trip_id",
@@ -25,8 +23,6 @@ class Station extends Model
      */
     protected $casts = [
         'estimated_time' => 'integer', // Estimated time in minutes.
-        'is_start' => 'boolean',
-        'is_destination' => 'boolean',
     ];
 
     public function governrate() {
