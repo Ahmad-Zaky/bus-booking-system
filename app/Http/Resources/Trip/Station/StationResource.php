@@ -15,8 +15,6 @@ class StationResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // TODO: 1. Calculate estimated arrival time
-
         return [
             "id" => $this->id,
             "estimated_time" => $this->estimated_time, // Estimated time in minutes

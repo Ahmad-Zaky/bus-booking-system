@@ -13,7 +13,7 @@ class TripController extends Controller
 {
     public function index(Request $request): TripCollection
     {
-        try { return new TripCollection(Trip::query()->filter($request)->paginate()); }
+        try { return new TripCollection(Trip::_paginate($request)); }
         
         catch (Throwable $th) {
             return $this->handleInternalErrorResponse($th);

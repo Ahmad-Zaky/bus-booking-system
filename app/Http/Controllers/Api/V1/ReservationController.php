@@ -15,7 +15,7 @@ class ReservationController extends Controller
 {
     public function index(Request $request): ReservationCollection|JsonResponse
     {
-        try { return new ReservationCollection(Reservation::query()->filter($request)->paginate()); }
+        try { return new ReservationCollection(Reservation::_paginate($request)); }
         
         catch (Throwable $th) {
             return $this->handleInternalErrorResponse($th);

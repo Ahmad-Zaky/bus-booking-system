@@ -62,6 +62,13 @@ class Trip extends Model
             });  
     }
 
+    public static function _paginate($request)
+    {
+        return self::query()->with([
+            "bus", "stations.governrate"
+        ])->filter($request)->paginate();
+    }
+
     public static function _create($data)
     {
         $data["estimated_arrival_at"] = (new self)->calcEstimatedArrivalAt($data["departure_at"], $data["stations"]);
