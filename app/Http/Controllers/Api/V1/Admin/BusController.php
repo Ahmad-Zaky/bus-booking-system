@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Api\V1\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BusStoreRequest;
 use App\Http\Requests\BusUpdateRequest;
-use App\Http\Resources\BusCollection;
-use App\Http\Resources\BusResource;
+use App\Http\Resources\Bus\{BusCollection, BusResource};
 use App\Models\Bus;
+use Illuminate\Http\JsonResponse;
 use Throwable;
 
 class BusController extends Controller
 {
-    public function index(): BusCollection
+    public function index(): BusCollection|JsonResponse
     {
         try { return new BusCollection(Bus::paginate()); }
         
@@ -21,7 +21,7 @@ class BusController extends Controller
         }
     }
 
-    public function show(Bus $bus): BusResource
+    public function show(Bus $bus): BusResource|JsonResponse
     {
         try { return new BusResource($bus); }
         
@@ -30,7 +30,7 @@ class BusController extends Controller
         }
     }
 
-    public function store(BusStoreRequest $request): BusResource
+    public function store(BusStoreRequest $request): BusResource|JsonResponse
     {
         try { return new BusResource(Bus::_create($request->validated())); }
         
@@ -39,7 +39,7 @@ class BusController extends Controller
         }
     }
 
-    public function update(BusUpdateRequest $request, Bus $bus): BusResource
+    public function update(BusUpdateRequest $request, Bus $bus): BusResource|JsonResponse
     {
         try { return new BusResource($bus->_update($request->validated())); }
         
@@ -48,7 +48,7 @@ class BusController extends Controller
         }
     }
 
-    public function destroy(Bus $bus): BusResource
+    public function destroy(Bus $bus): BusResource|JsonResponse
     {
         try { return new BusResource($bus->_destroy()); }
         
