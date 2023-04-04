@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Enums\ReservationStatusEnums;
 use App\Rules\DuplicateUserReservationsRule;
 use App\Rules\FutureTripsOnlyRule;
+use App\Rules\IsAvailableSeatRule;
 use App\Rules\SeatWithTripBusRule;
 use App\Rules\StationWithTripRule;
 use App\Rules\TripStatusRule;
@@ -35,7 +36,7 @@ class ReservationUpdateRequest extends FormRequest
             "from_station_id" => ["exists:stations,id", new StationWithTripRule],
             "to_station_id" => ["exists:stations,id", "different:from_station_id", new StationWithTripRule],
             "user_id" => ["exists:users,id", new DuplicateUserReservationsRule],
-            "seat_id" => ["exists:seats,id", new SeatWithTripBusRule],
+            "seat_id" => ["exists:seats,id", new SeatWithTripBusRule, new IsAvailableSeatRule],
         ];
     }
 }

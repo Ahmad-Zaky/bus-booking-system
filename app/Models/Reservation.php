@@ -63,6 +63,14 @@ class Reservation extends Model
                 return compareTo($q, "created_at", $request->to);
             });  
     }
+    
+    public static function _paginate($request)
+    {
+        return self::query()->with([
+            "fromStation.governrate", "toStation.governrate", "trip", "user", "seat",
+        ])->filter($request)->paginate();
+    }
+
     public static function _create($data)
     {
         return self::create($data);
