@@ -12,7 +12,7 @@ use Throwable;
 
 class BusController extends Controller
 {
-    public function index() 
+    public function index(): BusCollection
     {
         try { return new BusCollection(Bus::paginate()); }
         
@@ -21,7 +21,7 @@ class BusController extends Controller
         }
     }
 
-    public function show(Bus $bus) 
+    public function show(Bus $bus): BusResource
     {
         try { return new BusResource($bus); }
         
@@ -30,7 +30,7 @@ class BusController extends Controller
         }
     }
 
-    public function store(BusStoreRequest $request)
+    public function store(BusStoreRequest $request): BusResource
     {
         try { return new BusResource(Bus::_create($request->validated())); }
         
@@ -39,7 +39,7 @@ class BusController extends Controller
         }
     }
 
-    public function update(BusUpdateRequest $request, Bus $bus) 
+    public function update(BusUpdateRequest $request, Bus $bus): BusResource
     {
         try { return new BusResource($bus->_update($request->validated())); }
         
@@ -48,7 +48,7 @@ class BusController extends Controller
         }
     }
 
-    public function destroy(Bus $bus) 
+    public function destroy(Bus $bus): BusResource
     {
         try { return new BusResource($bus->_destroy()); }
         
