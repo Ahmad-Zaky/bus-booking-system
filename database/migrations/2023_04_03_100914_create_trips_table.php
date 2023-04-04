@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\TripStatusEnums;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,10 +17,10 @@ return new class extends Migration
             
             $table->string("title")->nullable();
             $table->string("number");
-            $table->tinyInteger("status");
+            $table->tinyInteger("status")->default(TripStatusEnums::WAITING);
 
             $table->timestamp("departure_at");
-            $table->timestamp("estimated_arrival_at");
+            $table->timestamp("estimated_arrival_at")->nullable();
             
             $table->foreignId('bus_id')
                 ->constrained()

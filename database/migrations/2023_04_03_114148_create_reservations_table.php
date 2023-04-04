@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ReservationStatusEnums;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +16,7 @@ return new class extends Migration
             $table->id();
 
             $table->float("amount");
-            $table->tinyInteger("status");
+            $table->tinyInteger("status")->default(ReservationStatusEnums::CONFIRMED);
             $table->text("notes");
 
             $table->foreignId('trip_id')
