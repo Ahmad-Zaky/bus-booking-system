@@ -46,7 +46,7 @@ class StationFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'parent_id' => Station::factory()->create(),
+                'parent_id' => Station::factory()->create($attributes),
             ];
         });
     }

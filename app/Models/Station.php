@@ -13,7 +13,7 @@ class Station extends Model
         "estimated_time",
         "is_start",
         "is_destination",
-        "order",
+        "parent_id",
         "governrate_id",
         "trip_id",
     ];
@@ -27,8 +27,15 @@ class Station extends Model
         'estimated_time' => 'integer', // Estimated time in minutes.
         'is_start' => 'boolean',
         'is_destination' => 'boolean',
-        'order' => 'integer',
     ];
+
+    public function prevStation() {
+        return $this->belongsTo(Station::class, "parent_id");
+    }
+
+    public function nextStation() {
+        return $this->hasOne(Station::class, "parent_id");
+    }
 
     public function governrate() {
         return $this->belongsTo(Governrate::class);

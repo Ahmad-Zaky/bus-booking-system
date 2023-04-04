@@ -23,6 +23,20 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
+            $table->unsignedBigInteger('from_station_id')->nullable();
+            $table->foreign('from_station_id')
+                ->references('id')
+                ->on('stations')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+
+            $table->unsignedBigInteger('to_station_id')->nullable();
+            $table->foreign('to_station_id')
+                ->references('id')
+                ->on('stations')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+
             $table->foreignId('user_id')
                 ->constrained()
                 ->onUpdate('cascade')

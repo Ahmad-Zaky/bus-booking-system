@@ -13,11 +13,13 @@ class Reservation extends Model
         "amount",
         "status",
         "notes",
+        "from_station_id",
+        "to_station_id",
         "trip_id",
         "user_id",
         "seat_id",
     ];
-        
+
     /**
      * The attributes that should be cast.
      *
@@ -27,6 +29,14 @@ class Reservation extends Model
         'amount' => 'float',
         'status' => 'integer',
     ];
+
+    public function fromStation() {
+        return $this->belongsTo(Station::class, "from_station_id");
+    }
+
+    public function toStation() {
+        return $this->belongsTo(Station::class, "to_station_id");
+    }
 
     public function trip() {
         return $this->belongsTo(Trip::class);
