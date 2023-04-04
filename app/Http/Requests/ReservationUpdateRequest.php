@@ -3,6 +3,11 @@
 namespace App\Http\Requests;
 
 use App\Enums\ReservationStatusEnums;
+use App\Rules\DuplicateUserReservationsRule;
+use App\Rules\FutureTripsOnlyRule;
+use App\Rules\SeatWithTripBusRule;
+use App\Rules\StationWithTripRule;
+use App\Rules\TripStatusRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ReservationUpdateRequest extends FormRequest
@@ -22,18 +27,15 @@ class ReservationUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        // TODO: 1. validate that seat is related to bus which is respectively related to the trip reservation.
-        // TODO: 2. validate prevent duplicate reservations for the same user on the same trip.
-
         return [
             "amount" => "required|numeric",
             "status" => "required|in:". ReservationStatusEnums::implode(),
             "notes" => "string",
-            "from_station_id" => "exists:stations,id",
-            "to_station_id" => "exists:stations,id|different:from_station_id",
-            "trip_id" => "exists:trips,id",
-            "user_id" => "exists:users,id",
-            "seat_id" => "exists:seats,id",
+            "trip_id" => ["exists:trips,id", new FutureTripsOnlyRule, new TripStatusRule],
+            "from_station_id" => ["exists:stations,id", new StationWithTripRule],
+            "to_station_id" => ["exists:stations,id", "different:from_station_id", new StationWithTripRule],
+            "user_id" => ["exists:users,id", new DuplicateUserReservationsRule],
+            "seat_id" => ["exists:seats,id", new SeatWithTripBusRule],
         ];
     }
 }
