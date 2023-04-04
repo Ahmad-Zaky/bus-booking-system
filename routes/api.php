@@ -8,9 +8,7 @@ Route::post('register', [AuthController::class, 'register'])->name("register");
 Route::post('login', [AuthController::class, 'login'])->name("login");
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('profile', function (Request $request) {
-        return $request->user();
-    })->name("profile");
+    Route::get('profile', [AuthController::class, 'profile'])->name("profile");
 
     Route::post('logout', [AuthController::class, 'logout'])->name("logout");
 });

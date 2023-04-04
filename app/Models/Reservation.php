@@ -49,4 +49,36 @@ class Reservation extends Model
     public function seat() {
         return $this->belongsTo(Seat::class);
     }
+
+    public function scopeFilter($q, $request) 
+    {
+        $q
+            ->when($request->from && $request->to, function ($q) use ($request) {
+                return compareFromAndTo($q, "created_at", $request->from, $request->to);
+            })
+            ->when($request->from && ! $request->to, function ($q) use ($request) {
+                return compareFrom($q, "created_at", $request->from);
+            })
+            ->when(! $request->from && $request->to, function ($q) use ($request) {
+                return compareTo($q, "created_at", $request->to);
+            });  
+    }
+    public static function _create($data)
+    {
+        return self::create($data);
+    }
+
+    public function _update($data)
+    {
+        $this->update($data);
+
+        return $this;
+    }
+
+    public function _destroy()
+    {
+        $this->delete();
+
+        return $this;
+    }
 }
