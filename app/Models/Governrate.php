@@ -17,4 +17,12 @@ class Governrate extends Model
     public function stations() {
         return $this->hasMany(Station::class);
     }
+
+    public function scopeFilter($q, $request) 
+    {
+        $q
+            ->when($request->search, function ($q, $search) {
+                $q->where("name", "like", "%{$search}%" );
+            });  
+    }
 }
