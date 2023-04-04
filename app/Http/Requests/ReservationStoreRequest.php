@@ -38,6 +38,7 @@ class ReservationStoreRequest extends FormRequest
     public function rules(): array
     {
         // TODO: 1. review normal user access and prevent some critical actions to be only for admins
+        // TODO: 2. seats could be reserved if its partially booked for the trip.
 
         return [
             "amount" => "required|numeric",
