@@ -1,0 +1,1977 @@
+{
+	"info": {
+		"_postman_id": "9d4be742-a312-418c-86ab-6674ed6ffdbd",
+		"name": "Bus Booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23792314"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Register",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Body matches string\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.collectionVariables.set(\"token\", jsonData.token);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Admin",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "new_admin@email.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "password",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{admin}}register",
+									"host": [
+										"{{admin}}register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Body matches string\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.collectionVariables.set(\"admin_token\", jsonData.token);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "admin@email.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "password",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{admin}}login",
+									"host": [
+										"{{admin}}login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Logout",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Body matches string\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.collectionVariables.set(\"admin_token\", \"\");",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{admin}}logout",
+									"host": [
+										"{{admin}}logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Profile",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{admin}}profile",
+									"host": [
+										"{{admin}}profile"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Bus",
+					"item": [
+						{
+							"name": "List",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{admin}}buses?page=3",
+									"host": [
+										"{{admin}}buses"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Show",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{admin}}buses/45",
+									"host": [
+										"{{admin}}buses"
+									],
+									"path": [
+										"45"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "number",
+											"value": "9327523",
+											"type": "text"
+										},
+										{
+											"key": "plate_number",
+											"value": "93827 khw",
+											"type": "text"
+										},
+										{
+											"key": "capacity",
+											"value": "12",
+											"type": "text"
+										},
+										{
+											"key": "seats[0][number]",
+											"value": "a1",
+											"type": "text"
+										},
+										{
+											"key": "seats[0][order]",
+											"value": "0",
+											"type": "text"
+										},
+										{
+											"key": "seats[1][number]",
+											"value": "a2",
+											"type": "text"
+										},
+										{
+											"key": "seats[1][order]",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "seats[2][number]",
+											"value": "b1",
+											"type": "text"
+										},
+										{
+											"key": "seats[2][order]",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "seats[3][number]",
+											"value": "b2",
+											"type": "text"
+										},
+										{
+											"key": "seats[3][order]",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "seats[4][number]",
+											"value": "a3",
+											"type": "text"
+										},
+										{
+											"key": "seats[4][order]",
+											"value": "4",
+											"type": "text"
+										},
+										{
+											"key": "seats[5][number]",
+											"value": "a4",
+											"type": "text"
+										},
+										{
+											"key": "seats[5][order]",
+											"value": "5",
+											"type": "text"
+										},
+										{
+											"key": "seats[6][number]",
+											"value": "b3",
+											"type": "text"
+										},
+										{
+											"key": "seats[6][order]",
+											"value": "6",
+											"type": "text"
+										},
+										{
+											"key": "seats[7][number]",
+											"value": "b4",
+											"type": "text"
+										},
+										{
+											"key": "seats[7][order]",
+											"value": "7",
+											"type": "text"
+										},
+										{
+											"key": "seats[8][number]",
+											"value": "a5",
+											"type": "text"
+										},
+										{
+											"key": "seats[8][order]",
+											"value": "8",
+											"type": "text"
+										},
+										{
+											"key": "seats[9][number]",
+											"value": "a6",
+											"type": "text"
+										},
+										{
+											"key": "seats[9][order]",
+											"value": "9",
+											"type": "text"
+										},
+										{
+											"key": "seats[10][number]",
+											"value": "b5",
+											"type": "text"
+										},
+										{
+											"key": "seats[10][order]",
+											"value": "10",
+											"type": "text"
+										},
+										{
+											"key": "seats[11][number]",
+											"value": "b6",
+											"type": "text"
+										},
+										{
+											"key": "seats[11][order]",
+											"value": "11",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{admin}}buses",
+									"host": [
+										"{{admin}}buses"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										},
+										{
+											"key": "number",
+											"value": "9327523",
+											"type": "text"
+										},
+										{
+											"key": "plate_number",
+											"value": "93827 khw",
+											"type": "text"
+										},
+										{
+											"key": "capacity",
+											"value": "12",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{admin}}buses/49",
+									"host": [
+										"{{admin}}buses"
+									],
+									"path": [
+										"49"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										},
+										{
+											"key": "number",
+											"value": "9327523",
+											"type": "text"
+										},
+										{
+											"key": "plate_number",
+											"value": "93827 khw",
+											"type": "text"
+										},
+										{
+											"key": "capacity",
+											"value": "12",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{admin}}buses/45",
+									"host": [
+										"{{admin}}buses"
+									],
+									"path": [
+										"45"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Trip",
+					"item": [
+						{
+							"name": "List",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{admin}}trips",
+									"host": [
+										"{{admin}}trips"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "from",
+											"value": "2023-11-12",
+											"disabled": true
+										},
+										{
+											"key": "to",
+											"value": "2023-12-12",
+											"disabled": true
+										},
+										{
+											"key": "search",
+											"value": "some title",
+											"description": "search in trip title and trip number",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Show",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{admin}}trips/1",
+									"host": [
+										"{{admin}}trips"
+									],
+									"path": [
+										"1"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "new trip title",
+											"type": "text"
+										},
+										{
+											"key": "number",
+											"value": "93278523",
+											"type": "text"
+										},
+										{
+											"key": "departure_at",
+											"value": "2023-12-12 12:12:00",
+											"type": "text"
+										},
+										{
+											"key": "estimated_arrival_at",
+											"value": "2023-12-12 14:12:00",
+											"type": "text"
+										},
+										{
+											"key": "bus_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "stations[0][estimated_time]",
+											"value": "180",
+											"type": "text"
+										},
+										{
+											"key": "stations[0][order]",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "stations[0][governrate_id]",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "stations[1][estimated_time]",
+											"value": "240",
+											"type": "text"
+										},
+										{
+											"key": "stations[1][order]",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "stations[1][governrate_id]",
+											"value": "4",
+											"type": "text"
+										},
+										{
+											"key": "stations[2][estimated_time]",
+											"value": "180",
+											"type": "text"
+										},
+										{
+											"key": "stations[2][order]",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "stations[2][governrate_id]",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "stations[3][estimated_time]",
+											"value": "360",
+											"type": "text"
+										},
+										{
+											"key": "stations[3][order]",
+											"value": "4",
+											"type": "text"
+										},
+										{
+											"key": "stations[3][governrate_id]",
+											"value": "3",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{admin}}trips",
+									"host": [
+										"{{admin}}trips"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "new trip title",
+											"type": "text"
+										},
+										{
+											"key": "number",
+											"value": "9327523",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "0",
+											"type": "text"
+										},
+										{
+											"key": "departure_at",
+											"value": "2023-12-12 12:12:00",
+											"type": "text"
+										},
+										{
+											"key": "estimated_arrival_at",
+											"value": "2023-12-12 14:12:00",
+											"type": "text"
+										},
+										{
+											"key": "bus_id",
+											"value": "1",
+											"description": "0 -> waiting \n1 -> on way\n2 -> arrived\n3 -> resescheduled\n4 -> cancelled",
+											"type": "text"
+										},
+										{
+											"key": "stations[0][estimated_time]",
+											"value": "180",
+											"type": "text"
+										},
+										{
+											"key": "stations[0][order]",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "stations[0][governrate_id]",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "stations[1][estimated_time]",
+											"value": "240",
+											"type": "text"
+										},
+										{
+											"key": "stations[1][order]",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "stations[1][governrate_id]",
+											"value": "4",
+											"type": "text"
+										},
+										{
+											"key": "stations[2][estimated_time]",
+											"value": "180",
+											"type": "text"
+										},
+										{
+											"key": "stations[2][order]",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "stations[2][governrate_id]",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "stations[3][estimated_time]",
+											"value": "380",
+											"type": "text"
+										},
+										{
+											"key": "stations[3][order]",
+											"value": "4",
+											"type": "text"
+										},
+										{
+											"key": "stations[3][governrate_id]",
+											"value": "3",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{admin}}trips/36",
+									"host": [
+										"{{admin}}trips"
+									],
+									"path": [
+										"36"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										},
+										{
+											"key": "number",
+											"value": "9327523",
+											"type": "text"
+										},
+										{
+											"key": "plate_number",
+											"value": "93827 khw",
+											"type": "text"
+										},
+										{
+											"key": "capacity",
+											"value": "12",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{admin}}trips/35",
+									"host": [
+										"{{admin}}trips"
+									],
+									"path": [
+										"35"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Reservation",
+					"item": [
+						{
+							"name": "List",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{admin}}reservations",
+									"host": [
+										"{{admin}}reservations"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "from",
+											"value": "2023-11-12",
+											"disabled": true
+										},
+										{
+											"key": "to",
+											"value": "2023-12-12",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Show",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{admin}}reservations/2",
+									"host": [
+										"{{admin}}reservations"
+									],
+									"path": [
+										"2"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "amount",
+											"value": "100",
+											"type": "text"
+										},
+										{
+											"key": "notes",
+											"value": "some notes ...",
+											"type": "text"
+										},
+										{
+											"key": "from_station_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "to_station_id",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "trip_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "user_id",
+											"value": "11",
+											"type": "text"
+										},
+										{
+											"key": "seat_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{admin}}reservations",
+									"host": [
+										"{{admin}}reservations"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										},
+										{
+											"key": "amount",
+											"value": "100",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "0",
+											"type": "text"
+										},
+										{
+											"key": "notes",
+											"value": "some notes edited ...",
+											"type": "text"
+										},
+										{
+											"key": "from_station_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "to_station_id",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "trip_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "user_id",
+											"value": "11",
+											"type": "text"
+										},
+										{
+											"key": "seat_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{admin}}reservations/21",
+									"host": [
+										"{{admin}}reservations"
+									],
+									"path": [
+										"21"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										},
+										{
+											"key": "number",
+											"value": "9327523",
+											"type": "text"
+										},
+										{
+											"key": "plate_number",
+											"value": "93827 khw",
+											"type": "text"
+										},
+										{
+											"key": "capacity",
+											"value": "12",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{admin}}reservations/11",
+									"host": [
+										"{{admin}}reservations"
+									],
+									"path": [
+										"11"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Governrate",
+					"item": [
+						{
+							"name": "List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{admin}}governrates",
+									"host": [
+										"{{admin}}governrates"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "Alexandria",
+											"description": "search by name",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{admin_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Front",
+			"item": [
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Register",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Body matches string\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.collectionVariables.set(\"token\", jsonData.token);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Ahmed",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "me@email.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "password",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "password",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{front}}register",
+									"host": [
+										"{{front}}register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Body matches string\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.collectionVariables.set(\"token\", jsonData.token);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "me@email.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "password",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{front}}login",
+									"host": [
+										"{{front}}login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Logout",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Body matches string\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.collectionVariables.set(\"token\", \"\";",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{front}}logout",
+									"host": [
+										"{{front}}logout"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Profile",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{front}}profile",
+									"host": [
+										"{{front}}profile"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Reservation",
+					"item": [
+						{
+							"name": "List",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{admin}}reservations",
+									"host": [
+										"{{admin}}reservations"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "from",
+											"value": "2023-11-12",
+											"disabled": true
+										},
+										{
+											"key": "to",
+											"value": "2023-12-12",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Show",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{admin}}reservations/2",
+									"host": [
+										"{{admin}}reservations"
+									],
+									"path": [
+										"2"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "amount",
+											"value": "100",
+											"type": "text"
+										},
+										{
+											"key": "notes",
+											"value": "some notes ...",
+											"type": "text"
+										},
+										{
+											"key": "from_station_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "to_station_id",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "trip_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "user_id",
+											"value": "11",
+											"type": "text"
+										},
+										{
+											"key": "seat_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{admin}}reservations",
+									"host": [
+										"{{admin}}reservations"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										},
+										{
+											"key": "amount",
+											"value": "100",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "0",
+											"type": "text"
+										},
+										{
+											"key": "notes",
+											"value": "some notes edited ...",
+											"type": "text"
+										},
+										{
+											"key": "from_station_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "to_station_id",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "trip_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "user_id",
+											"value": "11",
+											"type": "text"
+										},
+										{
+											"key": "seat_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{admin}}reservations/11",
+									"host": [
+										"{{admin}}reservations"
+									],
+									"path": [
+										"11"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										},
+										{
+											"key": "number",
+											"value": "9327523",
+											"type": "text"
+										},
+										{
+											"key": "plate_number",
+											"value": "93827 khw",
+											"type": "text"
+										},
+										{
+											"key": "capacity",
+											"value": "12",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{admin}}reservations/11",
+									"host": [
+										"{{admin}}reservations"
+									],
+									"path": [
+										"11"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Trip",
+					"item": [
+						{
+							"name": "List",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{admin}}trips",
+									"host": [
+										"{{admin}}trips"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "from",
+											"value": "2023-11-12",
+											"disabled": true
+										},
+										{
+											"key": "to",
+											"value": "2023-12-12",
+											"disabled": true
+										},
+										{
+											"key": "search",
+											"value": "some title",
+											"description": "search in trip title and trip number",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Show",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {
+									"accept": true
+								}
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{admin}}trips/2",
+									"host": [
+										"{{admin}}trips"
+									],
+									"path": [
+										"2"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "admin",
+			"value": "http://localhost:8000/api/admin/",
+			"type": "string"
+		},
+		{
+			"key": "front",
+			"value": "http://localhost:8000/api/",
+			"type": "string"
+		},
+		{
+			"key": "admin_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
