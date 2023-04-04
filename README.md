@@ -10,9 +10,9 @@ Bus booking system
 2. run `sudo docker compose up --build -d` or without sudo if you're on windows.
 3. then run `sudo docker exec -it bus_booking_app /bin/bash` to exec into your application.
 4. run `composer install` consider using a php v8+.
-5. copy .env.example to .env and configure your db.
-6. copy .env.testing.example to .env.testing and configure your test db.
-7. import db.sql found in the setup directory from the root.
+5. copy `.env.example` to `.env` and configure your db.
+6. copy `.env.testing.example` to `.env.testing` and configure your test db.
+7. import `booking.sql` found in the setup directory from the root.
 8. import your postman collection from the setup directory at the root.
 9.  you can access admin portal using `admin@email.com` and the password is `password`.
 10. you can access user portal using `me@email.com` adn the password is `password`,
@@ -21,9 +21,9 @@ Bus booking system
 
 1. Clone the project.
 2. run `composer install` consider using a php v8+.
-3. copy .env.example to .env and configure your db.
-4. copy .env.testing.example to .env.testing and configure your test db.
-5. import db.sql found in the setup directory from the root.
+3. copy `.env.example` to `.env` and configure your db.
+4. copy `.env.testing.example` to `.env.testing` and configure your test db.
+5. import `booking.sql` found in the setup directory from the root.
 6. import your postman collection from the setup directory at the root.
 7. then run `php artisan serve` to server the project.
 8. you can access admin portal using `admin@email.com` and the password is `password`.
