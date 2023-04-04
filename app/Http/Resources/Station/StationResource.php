@@ -20,6 +20,7 @@ class StationResource extends JsonResource
         return [
             "id" => $this->id,
             "estimated_time" => $this->estimated_time, // Estimated time in minutes
+            "estimated_arrival_at" => $this->estimated_arrival_at,
             "governrate" => new GovernrateResource($this->governrate),
             "trip" => new TripResource($this->trip),
             "prevStation" => $this->prevStation ? [
