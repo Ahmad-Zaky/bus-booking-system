@@ -21,12 +21,13 @@ class BusUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        // TODO: 1. validate seats
-
         return [
             "number" => "integer|unique:buses,number,{$this->bus->id}",
             "plate_number" => "string|unique:buses,plate_number,{$this->bus->id}",
             "capacity" => "integer|min:12",
+            "seats" => "required|array|size:{$this->capacity}",
+            "seats.*.number" => "required|distinct:strict",
+            "seats.*.order" => "required|distinct:strict",
         ];
     }
 }

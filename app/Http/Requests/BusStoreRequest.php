@@ -21,12 +21,13 @@ class BusStoreRequest extends FormRequest
      */
     public function rules(): array
     {
-        // TODO: 1. validate seats
-
         return [
             "number" => "required|integer|unique:buses,number",
             "plate_number" => "required|string|unique:buses,plate_number",
             "capacity" => "required|integer|min:12",
+            "seats" => "required|array|size:{$this->capacity}",
+            "seats.*.number" => "required|distinct:strict",
+            "seats.*.order" => "required|distinct:strict",
         ];
     }
 }

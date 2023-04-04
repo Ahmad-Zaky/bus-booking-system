@@ -31,4 +31,15 @@ class Seat extends Model
     public function reservations() {
         return $this->hasMany(Reservation::class);
     }
+
+    public static function _attach(Bus $bus, array $seats) 
+    {
+        $bus->seats()->delete();
+
+        foreach ($seats as $seat) {
+            $bus->seats()->create($seat);
+        }
+
+        return true;
+    }
 }

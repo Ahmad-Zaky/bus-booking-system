@@ -34,12 +34,18 @@ class Bus extends Model
 
     public static function _create($data)
     {
-        return self::create($data);
+        $bus = self::create($data);
+
+        Seat::_attach($bus, $data["seats"]);
+
+        return $bus;
     }
 
     public function _update($data)
     {
         $this->update($data);
+
+        Seat::_attach($this, $data["seats"]);
 
         return $this;
     }
