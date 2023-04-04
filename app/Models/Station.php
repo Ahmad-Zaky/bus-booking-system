@@ -29,19 +29,37 @@ class Station extends Model
         'is_destination' => 'boolean',
     ];
 
-    public function prevStation() {
-        return $this->belongsTo(Station::class, "parent_id");
-    }
-
-    public function nextStation() {
-        return $this->hasOne(Station::class, "parent_id");
-    }
-
     public function governrate() {
         return $this->belongsTo(Governrate::class);
     }
 
     public function trip() {
         return $this->belongsTo(Trip::class);
+    }
+
+    public function prevStation() {
+        return $this->belongsTo(Station::class, "parent_id")->with("prevStation");
+    }
+
+    public function nextStation() {
+        return $this->hasOne(Station::class, "parent_id")->with("nextStation");
+    }
+
+    public function getPrevStationsAttribute()
+    {
+        return collect(flatPrevStations($this));
+    }
+
+    public function getNextStationsAttribute()
+    {
+        return collect(flatNextStations($this));
+    }
+
+    public function getLastStationAttribute() {
+        return $this->nextStations->last();
+    }
+
+    public function getFirstStationAttribute() {
+        return $this->prevStations->last();
     }
 }
