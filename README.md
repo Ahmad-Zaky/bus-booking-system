@@ -9,7 +9,7 @@ Bus booking system
 1. Clone the project.
 2. run `sudo docker compose up --build -d` or without sudo if you're on windows.
 3. then run `sudo docker exec -it bus_booking_app /bin/bash` to exec into your application.
-4. run `composer install` consider using a php v8+.
+4. run `composer install`.
 5. copy `.env.example` to `.env` and configure your db.
 6. copy `.env.testing.example` to `.env.testing` and configure your test db.
 8. then to seed data, we have two options.
