@@ -18,7 +18,7 @@ class TripFactory extends Factory
      */
     public function definition(): array
     {
-        $departure_at = $this->faker->dateTime()->format("Y-m-d H:i:s");
+        $departure_at = $this->faker->dateTimeBetween("+1 days", "+30 days")->format("Y-m-d H:i:s");
         
         $estimatedArrivalAt = addHours($departure_at, rand(1, 9));
 

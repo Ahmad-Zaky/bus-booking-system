@@ -25,7 +25,6 @@ class ReservationFactory extends Factory
 
         
         $prevStation = $station->prevStation->parent_id = Station::factory()->create();
-        $currentStation = $station->prevStation;
         $nextStation = $station;
 
         return [

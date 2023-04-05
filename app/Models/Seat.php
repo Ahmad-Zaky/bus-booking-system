@@ -47,4 +47,16 @@ class Seat extends Model
     {
         return ! $trip->reservations->pluck("seat_id")->contains($this->id);
     }
+
+    public static function getAvailableSeats(Trip $trip) 
+    {
+        return self::whereNotIn(
+            "id", $trip->reservations->pluck("seat_id")->toArray()
+        )->get();
+    }
+
+    public static function getAvailableSeat(Trip $trip) 
+    {
+        return self::getAvailableSeats($trip)->random();
+    }
 }

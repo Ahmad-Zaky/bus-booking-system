@@ -18,18 +18,6 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)
-            ->has(
-                Reservation::factory()
-                    ->for(
-                        Trip::factory()
-                            ->has(
-                                Station::factory(3)->parent()
-                            )->for(
-                                Bus::factory()->has(Seat::factory())
-                            )
-                    )
-            )
-            ->create();
+        User::factory()->create(["email" => "me@email.com"]);
     }
 }

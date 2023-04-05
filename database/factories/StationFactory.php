@@ -21,7 +21,7 @@ class StationFactory extends Factory
     public function definition(): array
     {
         return [
-            "estimated_time" => $this->faker->unique()->randomNumber(2),
+            "estimated_time" => $this->faker->randomNumber(2),
             "parent_id" => NULL,
             "governrate_id" => $this->getGovernrate(),
             "trip_id" => Trip::factory(),
