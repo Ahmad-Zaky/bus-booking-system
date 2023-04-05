@@ -20,10 +20,6 @@ class StarterSeeder extends Seeder
      */
     public function run(): void
     {
-
-        // Fresh DB
-        Artisan::call('migrate:fresh');
-
         (new AdminSeeder)->run();
         (new GovernrateSeeder)->run();
         (new UserSeeder)->run();
