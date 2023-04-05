@@ -37,7 +37,7 @@ class SeatWithTripBusRule implements DataAwareRule, ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (! $bus = Trip::find($this->data["trip_id"])?->bus) {
+        if (! $bus = Trip::find($this->data["trip_id"] ?? NULL)?->bus) {
             return;
         }
 

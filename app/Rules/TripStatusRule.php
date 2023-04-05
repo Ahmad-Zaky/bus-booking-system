@@ -16,8 +16,10 @@ class TripStatusRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
+        if (! $trip = Trip::find($value)) return;
+
         if (in_array(
-                Trip::find($value)?->status,
+                $trip->status,
                 [TripStatusEnums::ARRIVED, TripStatusEnums::CANCELLED]
         )) { $fail(__('The :attribute has been arrived or canceled.')); }
     }

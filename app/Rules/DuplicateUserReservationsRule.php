@@ -37,6 +37,8 @@ class DuplicateUserReservationsRule implements DataAwareRule, ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
+        if (! isset($this->data["trip_id"])) return;
+
         if (request()->method() === "PUT") {
             if (
                 Trip::find($this->data["trip_id"])

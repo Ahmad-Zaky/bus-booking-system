@@ -42,7 +42,7 @@ class IsAvailableSeatRule implements DataAwareRule, ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (! $trip = Trip::find($this->data["trip_id"])) return;
+        if (! $trip = Trip::find($this->data["trip_id"] ?? NULL)) return;
 
         if (request()->method() === "PUT") {
             $reservations = $trip->reservations()

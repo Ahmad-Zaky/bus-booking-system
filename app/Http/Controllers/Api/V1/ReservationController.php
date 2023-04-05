@@ -35,7 +35,7 @@ class ReservationController extends Controller
 
     public function destroy(Reservation $reservation): ReservationResource|JsonResponse
     {
-        // TODO: 1. prevent deletion if status is checked in
+        // TODO: 1. prevent deletion if status is checked in with middleware
 
         try { return new ReservationResource($reservation->_destroy()); }
         

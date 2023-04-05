@@ -15,7 +15,8 @@ class FutureTripsOnlyRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (Trip::find($value)->departure_at < now()) {
+        $trip = Trip::find($value);
+        if ($trip && $trip->departure_at < now()) {
             $fail(__('The :attribute is an old trip'));
         }
     }

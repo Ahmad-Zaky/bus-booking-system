@@ -31,8 +31,8 @@ class ReservationUpdateRequest extends FormRequest
         // TODO: 1. validate which reservation status types can be determined by the user
 
         return [
-            "amount" => "required|numeric",
-            "status" => "required|in:". ReservationStatusEnums::implode(),
+            "amount" => "numeric",
+            "status" => "in:". ReservationStatusEnums::implode(),
             "notes" => "string",
             "trip_id" => ["exists:trips,id", new FutureTripsOnlyRule, new TripStatusRule],
             "from_station_id" => ["exists:stations,id", new StationWithTripRule],
