@@ -15,5 +15,5 @@ Route::middleware('auth:sanctum')->group(function () {
        
     Route::apiResource("trips", TripController::class);
 
-    Route::apiResource("reservations", ReservationController::class);
+    Route::apiResource("reservations", ReservationController::class)->middleware("ownReservations");
 });
