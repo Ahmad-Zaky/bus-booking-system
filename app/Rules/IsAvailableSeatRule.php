@@ -15,9 +15,14 @@ class IsAvailableSeatRule implements DataAwareRule, ValidationRule
      * @var array<string, mixed>
      */
     protected $data = [];
+
+    protected $request;
  
-    // ...
- 
+    function __construct($request)
+    {
+        $this->request = $request;
+    }
+    
     /**
      * Set the data under validation.
      *
@@ -37,23 +42,28 @@ class IsAvailableSeatRule implements DataAwareRule, ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
+        if (! $trip = Trip::find($this->data["trip_id"])) return;
+
         if (request()->method() === "PUT") {
+            $reservations = $trip->reservations()
+                ->whereNot("id", $this->request->reservation->id)
+                ->get();
+
+        } else { $reservations = $trip->reservations; }
+
+        foreach ($reservations as $reservation) {
+            if ($reservation->seat_id !== (int) $value) continue;
+            $fromStation = $reservation->fromStation;
+            $toStation = $reservation->toStation;
+            
+            $startIndex = $trip->sortedStations->pluck("id")->search($fromStation->id);
+            $endIndex = $trip->sortedStations->pluck("id")->search($toStation->id);
+            $stations = $trip->sortedStations->slice($startIndex, (($endIndex - $startIndex)+1));
+
             if (
-                Trip::find($this->data["trip_id"])
-                    ?->reservations()
-                    ->whereNot("seat_id", $value)
-                    ->pluck("seat_id")
-                    ->contains($value)
+                $stations->pluck("id")->contains($this->data["from_station_id"]) ||
+                $stations->pluck("id")->contains($this->data["to_station_id"])
             ) { $fail(__("The :attribute has already been taken.")); }
-
-            return;
         }
-
-        if (
-            Trip::find($this->data["trip_id"])
-                ?->reservations()
-                ->pluck("seat_id")
-                ->contains($value)
-        ) { $fail(__("The :attribute has already been taken.")); }
     }
 }

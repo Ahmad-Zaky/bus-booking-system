@@ -41,6 +41,14 @@ class Trip extends Model
         return $this->hasMany(Reservation::class);
     }
 
+    public function getSortedStationsAttribute() 
+    {
+        $firstStation = $this->stations()->whereNULL("parent_id")->first();
+        $stations = $firstStation?->nextStations->prepend($firstStation);
+        
+        return $stations;
+    }
+
     public function scopeFilter($q, $request) 
     {
         $q

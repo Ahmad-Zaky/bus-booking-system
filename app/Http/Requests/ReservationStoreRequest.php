@@ -37,9 +37,6 @@ class ReservationStoreRequest extends FormRequest
      */
     public function rules(): array
     {
-        // TODO: 1. review normal user access and prevent some critical actions to be only for admins
-        // TODO: 2. seats could be reserved if its partially booked for the trip.
-
         return [
             "amount" => "required|numeric",
             "notes" => "string",
@@ -47,7 +44,7 @@ class ReservationStoreRequest extends FormRequest
             "from_station_id" => ["exists:stations,id", new StationWithTripRule],
             "to_station_id" => ["exists:stations,id", "different:from_station_id", new StationWithTripRule],
             "user_id" => ["exists:users,id", new DuplicateUserReservationsRule],
-            "seat_id" => ["exists:seats,id", new SeatWithTripBusRule, new IsAvailableSeatRule],
+            "seat_id" => ["exists:seats,id", new SeatWithTripBusRule, new IsAvailableSeatRule($this)],
         ];
     }
 }

@@ -25,7 +25,7 @@ class ReservationResource extends JsonResource
             "from_station" => new StationResource($this->fromStation),
             "to_station" => new StationResource($this->toStation),
             "trip" => new TripResource($this->trip),
-            "seat" => new SeatResource($this->bus),
+            "seat" => new SeatResource($this->seat),
         ];
     }
 }

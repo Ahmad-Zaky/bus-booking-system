@@ -10,7 +10,7 @@ use App\Http\Controllers\Api\V1\Admin\GovernrateController;
 
 Route::post('login', [AuthController::class, 'login'])->name("admin.login");
 
-Route::middleware('auth:admin')->group(function () {
+Route::middleware('auth:admin')->name('admin.')->group(function () {
     Route::post('register', [AuthController::class, 'register'])->name("admin.register");
 
     Route::get('profile', [AuthController::class, 'profile'])->name("admin.profile");
