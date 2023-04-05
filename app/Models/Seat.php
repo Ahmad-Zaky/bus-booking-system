@@ -42,4 +42,9 @@ class Seat extends Model
 
         return true;
     }
+
+    public function isAvailable(Trip $trip) 
+    {
+        return ! $trip->reservations->pluck("seat_id")->contains($this->id);
+    }
 }

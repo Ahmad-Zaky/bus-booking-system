@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Resources\Trip;
+namespace App\Http\Resources\Trip\Seat;
 
 use App\Http\Resources\ExtendedJsonResource;
-use App\Http\Resources\Trip\Seat\SeatCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BusResource extends ExtendedJsonResource
+class SeatResource extends ExtendedJsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +15,14 @@ class BusResource extends ExtendedJsonResource
      */
     public function toArray(Request $request): array
     {
+        // In case with comes from a collection not from resource
+        if (parent::$collectionProvide) $this->provide = parent::$collectionProvide;
+
         return [
             "id" => $this->id,
             "number" => $this->number,
-            "plate_number" => $this->plate_number,
-            "seats" => new SeatCollection($this->seats, $this->provide->trip),
+            "order" => $this->order,
+            "is_available" => $this->resource->isAvailable($this->provide->trip),
         ];
     }
 }

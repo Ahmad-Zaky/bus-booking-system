@@ -22,7 +22,7 @@ class TripResource extends JsonResource
             "number" => $this->number,
             "departure_at" => $this->departure_at->format(config("app.datetime_format")),
             "estimated_arrival_at" => $this->estimated_arrival_at->format(config("app.datetime_format")),
-            "bus" => new BusResource($this->bus),
+            "bus" => (new BusResource($this->bus))->provide(["trip" => $this->resource]),
             "stations" => new StationCollection($this->stations),
         ];
     }
