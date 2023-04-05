@@ -799,7 +799,7 @@
 										},
 										{
 											"key": "number",
-											"value": "9327523",
+											"value": "46847704",
 											"type": "text"
 										},
 										{
@@ -886,12 +886,12 @@
 									]
 								},
 								"url": {
-									"raw": "{{admin}}trips/36",
+									"raw": "{{admin}}trips/1",
 									"host": [
 										"{{admin}}trips"
 									],
 									"path": [
-										"36"
+										"1"
 									],
 									"query": [
 										{
@@ -1516,83 +1516,6 @@
 					"name": "Reservation",
 					"item": [
 						{
-							"name": "List",
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"accept": true
-								}
-							},
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{admin}}reservations",
-									"host": [
-										"{{admin}}reservations"
-									],
-									"query": [
-										{
-											"key": "page",
-											"value": "1",
-											"disabled": true
-										},
-										{
-											"key": "from",
-											"value": "2023-11-12",
-											"disabled": true
-										},
-										{
-											"key": "to",
-											"value": "2023-12-12",
-											"disabled": true
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Show",
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {
-									"accept": true
-								}
-							},
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{admin}}reservations/2",
-									"host": [
-										"{{admin}}reservations"
-									],
-									"path": [
-										"2"
-									],
-									"query": [
-										{
-											"key": "page",
-											"value": "1",
-											"disabled": true
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Add",
 							"protocolProfileBehavior": {
 								"disabledSystemHeaders": {
@@ -1623,22 +1546,17 @@
 										},
 										{
 											"key": "from_station_id",
-											"value": "1",
+											"value": "58",
 											"type": "text"
 										},
 										{
 											"key": "to_station_id",
-											"value": "2",
+											"value": "59",
 											"type": "text"
 										},
 										{
 											"key": "trip_id",
 											"value": "1",
-											"type": "text"
-										},
-										{
-											"key": "user_id",
-											"value": "11",
 											"type": "text"
 										},
 										{
@@ -1649,9 +1567,9 @@
 									]
 								},
 								"url": {
-									"raw": "{{admin}}reservations",
+									"raw": "{{front}}reservations",
 									"host": [
-										"{{admin}}reservations"
+										"{{front}}reservations"
 									],
 									"query": [
 										{
@@ -1705,22 +1623,17 @@
 										},
 										{
 											"key": "from_station_id",
-											"value": "1",
+											"value": "58",
 											"type": "text"
 										},
 										{
 											"key": "to_station_id",
-											"value": "2",
+											"value": "59",
 											"type": "text"
 										},
 										{
 											"key": "trip_id",
 											"value": "1",
-											"type": "text"
-										},
-										{
-											"key": "user_id",
-											"value": "11",
 											"type": "text"
 										},
 										{
@@ -1731,12 +1644,12 @@
 									]
 								},
 								"url": {
-									"raw": "{{admin}}reservations/11",
+									"raw": "{{front}}reservations/22",
 									"host": [
-										"{{admin}}reservations"
+										"{{front}}reservations"
 									],
 									"path": [
-										"11"
+										"22"
 									],
 									"query": [
 										{
@@ -1791,9 +1704,9 @@
 									]
 								},
 								"url": {
-									"raw": "{{admin}}reservations/11",
+									"raw": "{{front}}reservations/11",
 									"host": [
-										"{{admin}}reservations"
+										"{{front}}reservations"
 									],
 									"path": [
 										"11"
@@ -1831,9 +1744,9 @@
 									}
 								],
 								"url": {
-									"raw": "{{admin}}trips",
+									"raw": "{{front}}trips",
 									"host": [
-										"{{admin}}trips"
+										"{{front}}trips"
 									],
 									"query": [
 										{
@@ -1879,9 +1792,9 @@
 									}
 								],
 								"url": {
-									"raw": "{{admin}}trips/2",
+									"raw": "{{front}}trips/2",
 									"host": [
-										"{{admin}}trips"
+										"{{front}}trips"
 									],
 									"path": [
 										"2"
