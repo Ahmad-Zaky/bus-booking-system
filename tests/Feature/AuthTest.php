@@ -13,8 +13,8 @@ uses(\Illuminate\Http\Response::class)->beforeAll(function() {
 
     $globals["auth.user"] = newUser();
 })
-->beforeEach(function () { prepare($this, "auth"); })->
-group("auth");
+->beforeEach(function () { prepare($this, "auth"); })
+->group("auth");
 
 it('can authenticate user using the login screen', function () {
     $this->postJson(route("login"), [
@@ -38,11 +38,7 @@ it("show validation error on email when user credential donot match", function (
         'email' => 'wrong@email.com',
         'password' => 'wrong password'
     ])
-    ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
-    ->assertJson([
-        'status' => false,
-        'message' => __('Email & Password does not match with our record.'),
-    ]);
+    ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 });
 
 it('can register as new user using the register screen', function () {

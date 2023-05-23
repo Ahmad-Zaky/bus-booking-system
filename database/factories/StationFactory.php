@@ -38,7 +38,7 @@ class StationFactory extends Factory
     }
 
     /**
-     * Indicate that the user is suspended.
+     * Indicate that the user is has parent.
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
